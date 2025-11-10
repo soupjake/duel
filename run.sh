@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 set -e
 
+cd backend
+
 if [ -f "./data/cleaned_data.json" ]; then
   echo "Found existing cleaned_data.json."
 else
   echo "No cleaned data found. Generating now..."
 
-  cd backend/scripts
+  cd scripts
 
   echo "Checking dependencies..."
   if [ ! -d "node_modules" ]; then
@@ -20,10 +22,8 @@ else
   
   cd ..
 fi
-
+s
 echo "Running backend..."
-
-cd backend/api
 
 echo "Checking dependencies..."
 if [ ! -d "node_modules" ]; then
@@ -33,7 +33,7 @@ else
   echo "Dependencies already installed."
 fi
 
-cd ..
+npm run start
 
 echo "Running frontend..."
 
