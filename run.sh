@@ -43,7 +43,7 @@ else
   echo "Dependencies already installed."
 fi
 
-# Run frontend (typically vite dev server)
+# Run frontend
 npm run dev
 
 # When frontend stops (Ctrl+C), kill backend

@@ -2,7 +2,7 @@ const baseUrl = "http://localhost:3000"
 
 export const getUsers = async () => {
   try {
-    const url = `${baseUrl}/users`
+    const url = `${baseUrl}/user`
     const response = await fetch(url)
 
     if (!response.ok) {
