@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+set -e
+
+if [ -f "./data/cleaned_data.json" ]; then
+  echo "Found existing cleaned_data.json."
+else
+  echo "No cleaned data found. Generating now..."
+
+  cd backend/scripts
+
+  echo "Checking dependencies..."
+  if [ ! -d "node_modules" ]; then
+    echo "Installing dependencies..."
+    npm install
+  else
+    echo "Dependencies already installed."
+  fi
+
+  npx ts-node cleanData.ts
+  
+  cd ..
+fi
+
+echo "Running backend..."
+
+cd backend/api
+
+echo "Checking dependencies..."
+if [ ! -d "node_modules" ]; then
+  echo "Installing dependencies..."
+  npm install
+else
+  echo "Dependencies already installed."
+fi
+
+cd ..
+
+echo "Running frontend..."
+
+cd frontend
+
+echo "Checking dependencies..."
+if [ ! -d "node_modules" ]; then
+  echo "Installing dependencies..."
+  npm install
+else
+  echo "Dependencies already installed."
+fi
+
+npm run dev
