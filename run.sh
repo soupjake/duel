@@ -1,28 +1,9 @@
 #!/usr/bin/env bash
 set -e
 
+# Run backend
 cd backend
 
-if [ -f "./data/cleaned_data.json" ]; then
-  echo "Found existing cleaned_data.json."
-else
-  echo "No cleaned data found. Generating now..."
-
-  cd scripts
-
-  echo "Checking dependencies..."
-  if [ ! -d "node_modules" ]; then
-    echo "Installing dependencies..."
-    npm install
-  else
-    echo "Dependencies already installed."
-  fi
-
-  npx ts-node cleanData.ts
-  
-  cd ..
-fi
-s
 echo "Running backend..."
 
 echo "Checking dependencies..."
@@ -33,11 +14,26 @@ else
   echo "Dependencies already installed."
 fi
 
-npm run start
+if [ -f "./data/cleaned_data.json" ]; then
+  echo "Found existing cleaned_data.json."
+else
+  echo "No cleaned data found. Generating now..."
+  cd scripts
+  npx ts-node cleanData.ts
+  cd ..
+fi
+
+# Start backend in background
+echo "Starting backend server..."
+npm run start &
+
+# Save PID so you can stop it later if needed
+BACKEND_PID=$!
+
+# Move to frontend
+cd ../frontend
 
 echo "Running frontend..."
-
-cd frontend
 
 echo "Checking dependencies..."
 if [ ! -d "node_modules" ]; then
@@ -47,4 +43,8 @@ else
   echo "Dependencies already installed."
 fi
 
+# Run frontend (typically vite dev server)
 npm run dev
+
+# When frontend stops (Ctrl+C), kill backend
+kill $BACKEND_PID
