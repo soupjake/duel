@@ -4,6 +4,8 @@ Lightweight mock backend + React frontend demo that processes a set of mixed JSO
 
 ## Quickstart
 
+NOTE: Ensure the user JSON files are placed in the project root under data/mixed/ (e.g. data/mixed/*.json).
+
 1. Full stack (recommended)
    - Make executable and run:
      ```bash
