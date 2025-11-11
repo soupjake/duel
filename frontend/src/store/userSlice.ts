@@ -33,7 +33,7 @@ export const userSlice = createSlice({
       state.cleanError = action.payload
     },
     setDirtyUsers: (state: UserState, action: PayloadAction<User[]>) => {
-      state.cleanUsers = action.payload
+      state.dirtyUsers = action.payload
     },
     setDirtyLoading: (state: UserState, action: PayloadAction<boolean>) => {
       state.dirtyLoading = action.payload

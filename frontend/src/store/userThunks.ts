@@ -12,7 +12,7 @@ import {
 
 export const fetchUsers = (): AppThunk => async (dispatch) => {
   await dispatch(fetchCleanUsers())
-  dispatch(fetchCleanUsers())
+  dispatch(fetchDirtyUsers())
 }
 
 export const fetchCleanUsers =

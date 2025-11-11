@@ -9,7 +9,7 @@ export const getCleanUsers = async () => {
       throw new Error(`Response status: ${response.status}`)
     }
 
-    console.log(await response.text())
+    return await response.json()
   } catch (error) {
     console.error(error)
   }
@@ -26,7 +26,7 @@ export const getDirtyUsers = async () => {
       throw new Error(`Response status: ${response.status}`)
     }
 
-    console.log(await response.text())
+    return await response.json()
   } catch (error) {
     console.error(error)
   }
