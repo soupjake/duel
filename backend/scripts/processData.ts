@@ -2,6 +2,7 @@ import { promises as fs } from "fs"
 import path from "path"
 import { v4 as uuid } from "uuid"
 import { User } from "./types"
+import { saveToFile } from "./utils"
 
 function validateData(input: any) {
   let data = { ...input }
@@ -97,12 +98,6 @@ async function loadAndCleanData(dirPath: string) {
   console.log(`Processed ${dirtyUsers.length} dirty users.`)
 
   return { cleanUsers, dirtyUsers }
-}
-
-
-async function saveToFile(data: any[], outPath: string) {
-  await fs.writeFile(outPath, JSON.stringify(data, null, 2), "utf8")
-  console.log(`Saved ${data.length} records to ${outPath}`)
 }
 
 
