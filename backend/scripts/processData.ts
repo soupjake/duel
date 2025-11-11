@@ -1,22 +1,41 @@
 import { promises as fs } from "fs"
 import path from "path"
+import { v4 as uuid } from "uuid"
 import { User } from "./types"
 
-function validateData(data: any): data is User {
-  return (
-    data.user_id
-    // data.name &&
-    // data.email &&
-    // data.instagram_handle &&
-    // data.tiktok_handle &&
-    // data.joined_at &&
-    // Array.isArray(data.advocacy_programs)
-  )
+function validateData(input: any) {
+  let data = { ...input }
+
+  if (!data.user_id) {
+    data.user_id = uuid()
+  }
+
+  if (!data.name || data.name === "???") {
+    return false
+  }
+
+  if (!data.email || data.email === "invalid-email") {
+    return false
+  }
+
+  if (!data.joined_at || data.joined_at === "not-a-date") {
+    return false
+  }
+
+  if (!data.instagram_handle?.startsWith("@")) {
+    data.instagram_handle = ""
+  }
+
+  if (!data.tiktok_handle?.startsWith("@")) {
+    data.tiktok_handle = ""
+  }
+
+  return true
 }
 
 function tryParse(input: string) {
   try {
-    const parsed = JSON.parse(input)
+    let parsed = JSON.parse(input)
     
     if (validateData(parsed)) {
       return { status: "ok", data: parsed }

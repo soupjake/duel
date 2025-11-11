@@ -12,10 +12,10 @@ function App() {
   }, [])
 
   return (
-    <div>
+    <>
       <span className='logo'>😎</span>
       <UserTabs />
-    </div>
+    </>
   )
 }
 

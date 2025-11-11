@@ -27,6 +27,21 @@ export const UserTable = (props: Props) => {
             dataIndex: "email",
             key: "email"
         },
+        {
+            title: "Instagram",
+            dataIndex: "instagram_handle",
+            key: "instagram_handle"
+        },
+        {
+            title: "TikTok",
+            dataIndex: "tiktok_handle",
+            key: "tiktok_handle"
+        },
+        {
+            title: "Joined",
+            dataIndex: "joined_at",
+            key: "joined_at"
+        },
     ]), [])
 
     if (error) {
@@ -34,6 +49,11 @@ export const UserTable = (props: Props) => {
     }
 
     return (
-        <Table dataSource={data} columns={columns} loading={loading} />
+        <Table
+            style={{ width: "100%"}}
+            dataSource={data}
+            columns={columns}
+            loading={loading}
+        />
     )
 }
