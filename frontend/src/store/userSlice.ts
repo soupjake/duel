@@ -8,6 +8,7 @@ type UserState = {
   dirtyUsers: User[]
   dirtyLoading: boolean
   dirtyError: boolean
+  selectedUser: User | undefined
 }
 
 export const initialState: UserState = {
@@ -16,7 +17,8 @@ export const initialState: UserState = {
   cleanError: false,
   dirtyUsers: [],
   dirtyLoading: false,
-  dirtyError: false
+  dirtyError: false,
+  selectedUser: undefined
 }
 
 export const userSlice = createSlice({
@@ -41,6 +43,9 @@ export const userSlice = createSlice({
     setDirtyError: (state: UserState, action: PayloadAction<boolean>) => {
       state.dirtyError = action.payload
     },
+    setSelectedUser: (state: UserState, action: PayloadAction<User | undefined>) => {
+      state.selectedUser = action.payload
+    },
   },
 })
 
@@ -50,7 +55,8 @@ export const {
   setCleanError,
   setDirtyUsers,
   setDirtyLoading,
-  setDirtyError
+  setDirtyError,
+  setSelectedUser
 } = userSlice.actions
 
 export default userSlice.reducer

@@ -2,7 +2,7 @@
 set -e
 
 # Wait time (seconds) before starting frontend
-BACKEND_WAIT_SECONDS="${BACKEND_WAIT_SECONDS:-2}"
+BACKEND_WAIT_SECONDS="${BACKEND_WAIT_SECONDS:-5}"
 
 # Run backend
 cd backend

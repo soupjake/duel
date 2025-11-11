@@ -1,6 +1,8 @@
-import { useMemo } from "react"
+import { useCallback, useMemo } from "react"
 import Table from "antd/es/table"
 import type { User } from "../types/user"
+import { useAppDispatch } from "../hooks/storeHooks"
+import { setSelectedUser } from "../store/userSlice"
 
 type Props = {
     data: User[]
@@ -10,6 +12,7 @@ type Props = {
 
 export const UserTable = (props: Props) => {
     const { data, loading, error } = props
+    const dispatch = useAppDispatch()
 
     const columns = useMemo(() => ([
         {
@@ -44,6 +47,14 @@ export const UserTable = (props: Props) => {
         },
     ]), [])
 
+    const onRow = useCallback((user: User) => {
+        return {
+            onClick: () => {
+                dispatch(setSelectedUser(user))
+            }
+        }
+    }, [data, dispatch])
+
     if (error) {
         return <p>Error fetching users</p>
     }
@@ -54,6 +65,7 @@ export const UserTable = (props: Props) => {
             dataSource={data}
             columns={columns}
             loading={loading}
+            onRow={onRow}
         />
     )
 }
