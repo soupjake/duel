@@ -1,0 +1,80 @@
+{
+  "mostLiked": {
+    "user_id": "73a7a794-9124-48f1-b784-924372a6f874",
+    "name": "Elvira Mertz",
+    "email": "Etha_Kuhic21@yahoo.com",
+    "instagram_handle": "@Lucienne_Schoen81",
+    "tiktok_handle": "@Berta29",
+    "joined_at": "2024-06-01T17:18:57.806Z",
+    "advocacy_programs": [
+      {
+        "program_id": "064cc4ee-6181-47fc-aa71-02d56faa47b2",
+        "brand": "Towne - Reynolds",
+        "tasks_completed": [
+          {
+            "task_id": "dce0a633-e32e-47c6-877b-cbb45b9e189a",
+            "platform": "Instagram",
+            "post_url": "https://complicated-corral.info",
+            "likes": 500,
+            "comments": 38,
+            "shares": 33,
+            "reach": 2520
+          }
+        ],
+        "total_sales_attributed": 451.10669554613287
+      }
+    ]
+  },
+  "mostCommented": {
+    "user_id": "73abb081-d468-472d-95dd-32dc8d8a19b6",
+    "name": "Harold Walter",
+    "email": "Quinn_Lemke@gmail.com",
+    "instagram_handle": "@Ryan.Kreiger10",
+    "tiktok_handle": "@Alayna_Satterfield49",
+    "joined_at": "2025-01-13T10:35:53.543Z",
+    "advocacy_programs": [
+      {
+        "program_id": "f7ba4416-0ff2-4eb0-b589-e51fc3f45455",
+        "brand": "Bradtke - Johnston",
+        "tasks_completed": [
+          {
+            "task_id": "75a4c27b-d84b-4a60-87d1-26863bb1ee12",
+            "platform": "Instagram",
+            "post_url": "https://urban-fishery.org/",
+            "likes": 203,
+            "comments": 50,
+            "shares": 44,
+            "reach": 5674
+          }
+        ],
+        "total_sales_attributed": 4675.146202899103
+      }
+    ]
+  },
+  "mostShared": {
+    "user_id": "4206fac2-f43f-4bd6-a95c-584c9d2bb22d",
+    "name": "Terrell Okuneva",
+    "email": "Lee.Kertzmann80@yahoo.com",
+    "instagram_handle": "@Davion.Roob39",
+    "tiktok_handle": "@Kevin_Powlowski50",
+    "joined_at": "2024-10-16T19:24:50.824Z",
+    "advocacy_programs": [
+      {
+        "program_id": "002ae95b-0d55-4ee9-a937-019d09fd85f2",
+        "brand": "Kuhic - Kulas",
+        "tasks_completed": [
+          {
+            "task_id": "535f9112-d42a-4548-a944-d5295f8d1679",
+            "platform": "TikTok",
+            "post_url": "https://instructive-recommendation.name",
+            "likes": 132,
+            "comments": 45,
+            "shares": 100,
+            "reach": 2519
+          }
+        ],
+        "total_sales_attributed": 3855.7288929200417
+      }
+    ]
+  }
+}

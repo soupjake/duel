@@ -32,7 +32,7 @@ async function generateMetrics(dataPath: string) {
       }
 
       for (const task of program.tasks_completed) {
-        const likes = typeof task?.likes === "string" ? parseInt(task.likes) : task?.likes ?? 0
+        const likes = task?.likes ?? 0
         const comments = task?.comments ?? 0
         const shares = task?.shares ?? 0
 
@@ -67,7 +67,9 @@ async function main() {
 
   const metrics = await generateMetrics(cleanPath)
 
-  await saveToFile(metrics, cleanPath)
+  const metricsPath = path.resolve("../output/metric_data.json")
+
+  await saveToFile(metrics, metricsPath)
 
   console.log("Generated metrics!")
 }
