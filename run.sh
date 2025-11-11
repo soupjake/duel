@@ -27,24 +27,24 @@ fi
 echo "Starting backend server..."
 npm run start &
 
-# # Save PID so you can stop it later if needed
-# BACKEND_PID=$!
+# Save PID so you can stop it later if needed
+BACKEND_PID=$!
 
-# # Move to frontend
-# cd ../frontend
+# Move to frontend
+cd ../frontend
 
-# echo "Running frontend..."
+echo "Running frontend..."
 
-# echo "Checking dependencies..."
-# if [ ! -d "node_modules" ]; then
-#   echo "Installing dependencies..."
-#   npm install
-# else
-#   echo "Dependencies already installed."
-# fi
+echo "Checking dependencies..."
+if [ ! -d "node_modules" ]; then
+  echo "Installing dependencies..."
+  npm install
+else
+  echo "Dependencies already installed."
+fi
 
-# # Run frontend
-# npm run dev
+# Run frontend
+npm run dev
 
-# # When frontend stops (Ctrl+C), kill backend
-# kill $BACKEND_PID
+# When frontend stops (Ctrl+C), kill backend
+kill $BACKEND_PID

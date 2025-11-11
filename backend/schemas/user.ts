@@ -1,75 +1,58 @@
-import mongoose from "mongoose"
+import mongoose, { Document, Model } from "mongoose"
 import fs from "fs"
 import path from "path"
 
-export const userSchema = new mongoose.Schema({
-  user_id: {
-    type: String,
-    nullable: true
-  },
-  name: {
-    type: String,
-    nullable: true
-  },
-  email: {
-    type: String,
-    nullable: true
-  },
-  instagram_handle: {
-    type: String,
-    nullable: true
-  },
-  tiktok_handle: {
-    type: String,
-    nullable: true
-  },
-  joined_at: {
-    type: String,
-    nullable: true
-  },
-  advocacy_programs: {
-    type: Array,
-    nullable: true
-  },
+
+export interface User extends Document {
+  user_id?: string
+  name?: string
+  email?: string
+  instagram_handle?: string
+  tiktok_handle?: string
+  joined_at?: string
+  advocacy_programs?: []
+}
+
+const userSchema = new mongoose.Schema<User>({
+  user_id: { type: String, default: null },
+  name: { type: String, default: null },
+  email: { type: String, default: null },
+  instagram_handle: { type: String, default: null },
+  tiktok_handle: { type: String, default: null },
+  joined_at: { type: String, default: null },
+  advocacy_programs: { type: [], default: [] },
 })
 
-export const CleanUser = mongoose.model("CleanUser", userSchema)
-export const DirtyUser = mongoose.model("DirtyUser", userSchema)
+// Create models
+export const CleanUser = mongoose.model<User>("CleanUser", userSchema)
+export const DirtyUser = mongoose.model<User>("DirtyUser", userSchema)
 
-export async function seedCleanUsers() {
-  const dataPath = path.resolve(process.cwd(), "data/clean_data.json")
+// ---- Reusable seeding helper ----
+async function seedCollection(model: Model<User>, filename: string, label: string) {
+  const dataPath = path.resolve(process.cwd(), `data/${filename}`)
 
-  if (fs.existsSync(dataPath)) {
-    const raw = fs.readFileSync(dataPath, "utf8")
-    const users = JSON.parse(raw)
+  if (!fs.existsSync(dataPath)) {
+    console.warn(`No ${label} seed file found.`)
+    return
+  }
 
-    const count = await CleanUser.countDocuments()
+  const raw = fs.readFileSync(dataPath, "utf8")
+  const users = JSON.parse(raw)
+  const count = await model.countDocuments()
 
-    if (count === 0) {
-      await CleanUser.insertMany(users)
-
-      console.log("Clean users seeded")
-    }
+  if (count === 0) {
+    await model.insertMany(users)
+    console.log(`Seeded ${users.length} ${label} users.`)
   } else {
-    console.log("No seed file found")
+    console.log(`${label} collection already contains ${count} documents.`)
   }
 }
 
+
+export async function seedCleanUsers() {
+  return seedCollection(CleanUser, "clean_data.json", "Clean")
+}
+
 export async function seedDirtyUsers() {
-  const dataPath = path.resolve(process.cwd(), "data/dirty_data.json")
-
-  if (fs.existsSync(dataPath)) {
-    const raw = fs.readFileSync(dataPath, "utf8")
-    const users = JSON.parse(raw)
-
-    const count = await DirtyUser.countDocuments()
-
-    if (count === 0) {
-      await DirtyUser.insertMany(users)
-
-      console.log("Dirty users seeded")
-    }
-  } else {
-    console.log("No seed file found")
-  }
+  return seedCollection(DirtyUser, "dirty_data.json", "Dirty")
 }
