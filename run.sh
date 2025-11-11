@@ -14,12 +14,12 @@ else
   echo "Dependencies already installed."
 fi
 
-if [ -f "./data/cleaned_data.json" ]; then
-  echo "Found existing cleaned_data.json."
+if [ -f "../data/clean_data.json" ]; then
+  echo "Found existing clean_data.json."
 else
-  echo "No cleaned data found. Generating now..."
+  echo "No clean data found. Generating now..."
   cd scripts
-  npx ts-node cleanData.ts
+  npx ts-node processData.ts
   cd ..
 fi
 
