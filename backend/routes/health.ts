@@ -2,6 +2,6 @@ import { Router } from "express"
 
 export const health = Router()
 
-health.get('/health', (req, res) => {
+health.get('/', (req, res) => {
   res.send({ status: "ok" })
 });

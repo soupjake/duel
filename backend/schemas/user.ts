@@ -23,12 +23,12 @@ const userSchema = new mongoose.Schema<User>({
   advocacy_programs: { type: [], default: [] },
 })
 
-// Create models
+
 export const CleanUser = mongoose.model<User>("CleanUser", userSchema)
 export const DirtyUser = mongoose.model<User>("DirtyUser", userSchema)
 
-// ---- Reusable seeding helper ----
-async function seedCollection(model: Model<User>, filename: string, label: string) {
+
+async function seedUsers(model: Model<User>, filename: string, label: string) {
   const dataPath = path.resolve(process.cwd(), `data/${filename}`)
 
   if (!fs.existsSync(dataPath)) {
@@ -50,9 +50,9 @@ async function seedCollection(model: Model<User>, filename: string, label: strin
 
 
 export async function seedCleanUsers() {
-  return seedCollection(CleanUser, "clean_data.json", "Clean")
+  return seedUsers(CleanUser, "clean_data.json", "Clean")
 }
 
 export async function seedDirtyUsers() {
-  return seedCollection(DirtyUser, "dirty_data.json", "Dirty")
+  return seedUsers(DirtyUser, "dirty_data.json", "Dirty")
 }
