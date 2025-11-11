@@ -89,8 +89,8 @@ async function saveToFile(data: any[], outPath: string) {
 
 async function main() {
   const dataDir = path.resolve("../../data/mixed")
-  const cleanPath = path.resolve("../data/clean_data.json")
-  const dirtyPath = path.resolve("../data/dirty_data.json")
+  const cleanPath = path.resolve("../output/clean_data.json")
+  const dirtyPath = path.resolve("../output/dirty_data.json")
 
   const { cleanUsers, dirtyUsers } = await loadAndCleanData(dataDir)
 

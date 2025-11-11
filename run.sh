@@ -17,7 +17,7 @@ else
   echo "Dependencies already installed."
 fi
 
-if [ -f "./data/clean_data.json" ]; then
+if [ -f "./output/clean_data.json" ]; then
   echo "Found existing clean_data.json."
 else
   echo "No clean data found. Generating now..."

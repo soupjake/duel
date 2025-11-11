@@ -14,7 +14,7 @@ NOTE: Ensure the user JSON files are placed in the project root under data/mixed
      ```
    - run.sh will:
      - install deps for backend and frontend if needed
-     - run processData.ts to generate data/clean_data.json and data/dirty_data.json if missing
+     - run processData.ts to generate output/clean_data.json and output/dirty_data.json if missing
      - start the backend (runs `npm run start` in backend/package.json, which builds via `tsc` and runs the compiled code)
      - start the frontend (runs Vite dev server from frontend/package.json)
 
@@ -47,7 +47,7 @@ The Mongoose models and seed logic are in backend/schemas/user.ts (CleanUser, Di
 
 ## Data processing
 
-- backend/scripts/processData.ts walks the files in data/mixed, attempts to parse each JSON file via tryParse/parseRaw, and categorizes each file into clean or dirty lists. It writes output JSON to data/clean_data.json and data/dirty_data.json which are then used by the backend seeding functions (seedCleanUsers, seedDirtyUsers) in backend/schemas/user.ts.
+- backend/scripts/processData.ts walks the files in data/mixed, attempts to parse each JSON file via tryParse/parseRaw, and categorizes each file into clean or dirty lists. It writes output JSON to output/clean_data.json and output/dirty_data.json which are then used by the backend seeding functions (seedCleanUsers, seedDirtyUsers) in backend/schemas/user.ts.
 
 - Input shape is described in backend/scripts/types.ts and frontend/src/types/user.ts.
 

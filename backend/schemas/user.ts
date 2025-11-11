@@ -29,7 +29,7 @@ export const DirtyUser = mongoose.model<User>("DirtyUser", userSchema)
 
 
 async function seedUsers(model: Model<User>, filename: string, label: string) {
-  const dataPath = path.resolve(process.cwd(), `data/${filename}`)
+  const dataPath = path.resolve(process.cwd(), `output/${filename}`)
 
   if (!fs.existsSync(dataPath)) {
     console.warn(`No ${label} seed file found.`)
