@@ -11,12 +11,14 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.10.1",
+    "antd": "^5.28.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-redux": "9.2.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
+    "@types/antd": "^1.0.4",
     "@types/node": "^24.10.0",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
