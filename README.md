@@ -43,8 +43,9 @@ A lightweight mock backend and React frontend demo that processes a set of mixed
 - **GET** `/user/clean/:id` — single clean user by MongoDB ID
 - **GET** `/user/dirty` — returns dirty/invalid users
 - **GET** `/user/dirty/:id` — single dirty user by MongoDB ID
+- **GET** `/user/metrics` — returns user metrics
 
-The Mongoose models and seed logic are in `backend/schemas/user.ts` (CleanUser, DirtyUser).
+The Mongoose models and seed logic are in `backend/schemas/user.ts` (CleanUser, DirtyUser) and `backend/schemas/metrics.ts` (UserMetrics).
 
 ## Data Processing
 
@@ -56,5 +57,5 @@ The Mongoose models and seed logic are in `backend/schemas/user.ts` (CleanUser, 
 ## Development Notes
 
 - The backend uses an in-memory MongoDB (`mongodb-memory-server`) started in `backend/database.ts`. This makes the backend ephemeral and suitable for local demos.
-- The frontend uses Redux Toolkit; the main slice is in `frontend/src/store/userSlice.ts` and async thunks are in `frontend/src/store/userThunks.ts`.
+- The frontend uses React with Redux Toolkit; the main slice is in `frontend/src/store/userSlice.ts` and async thunks are in `frontend/src/store/userThunks.ts`.
 - If you modify the backend TypeScript, run `npm run build` from the backend folder (or let `npm run start` run it).
