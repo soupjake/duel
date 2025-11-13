@@ -1,5 +1,6 @@
 import { Router } from "express"
 import { CleanUser, DirtyUser } from "../schemas/user"
+import { UserMetrics } from "../schemas/metric"
 
 export const user = Router()
 
@@ -48,5 +49,15 @@ user.get("/dirty/:id", async (req, res) => {
     res.json(user)
   } catch (err) {
     res.status(500).json({ error: "Error fetching user" })
+  }
+})
+
+user.get("/metrics", async (req, res) => {
+  try {
+    const metrics = await UserMetrics.find()
+
+    res.json(metrics)
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch user metrics" })
   }
 })

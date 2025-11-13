@@ -1,17 +1,6 @@
-import mongoose, { Document, Model } from "mongoose"
-import fs from "fs"
-import path from "path"
-
-
-export interface User extends Document {
-  user_id?: string
-  name?: string
-  email?: string
-  instagram_handle?: string
-  tiktok_handle?: string
-  joined_at?: string
-  advocacy_programs?: []
-}
+import mongoose from "mongoose"
+import { User } from "../types/user"
+import { seedModel } from "../scripts/utils"
 
 const userSchema = new mongoose.Schema<User>({
   user_id: { type: String, default: null },
@@ -28,31 +17,10 @@ export const CleanUser = mongoose.model<User>("CleanUser", userSchema)
 export const DirtyUser = mongoose.model<User>("DirtyUser", userSchema)
 
 
-async function seedUsers(model: Model<User>, filename: string, label: string) {
-  const dataPath = path.resolve(process.cwd(), `output/${filename}`)
-
-  if (!fs.existsSync(dataPath)) {
-    console.warn(`No ${label} seed file found.`)
-    return
-  }
-
-  const raw = fs.readFileSync(dataPath, "utf8")
-  const users = JSON.parse(raw)
-  const count = await model.countDocuments()
-
-  if (count === 0) {
-    await model.insertMany(users)
-    console.log(`Seeded ${users.length} ${label} users.`)
-  } else {
-    console.log(`${label} collection already contains ${count} documents.`)
-  }
-}
-
-
 export async function seedCleanUsers() {
-  return seedUsers(CleanUser, "clean_data.json", "Clean")
+  return seedModel(CleanUser, "clean_data.json")
 }
 
 export async function seedDirtyUsers() {
-  return seedUsers(DirtyUser, "dirty_data.json", "Dirty")
+  return seedModel(DirtyUser, "dirty_data.json")
 }

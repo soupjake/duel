@@ -1,4 +1,4 @@
-import { getCleanUsers, getDirtyUsers } from "../services/userService"
+import { getCleanUsers, getDirtyUsers, getUserMetrics } from "../services/userService"
 import type { AppThunk } from "./store"
 import { selectUsers } from "./userSelectors"
 import {
@@ -8,6 +8,7 @@ import {
   setDirtyError,
   setDirtyLoading,
   setDirtyUsers,
+  setMetrics,
 } from "./userSlice"
 
 export const fetchUsers = (): AppThunk => async (dispatch) => {
@@ -58,5 +59,22 @@ export const fetchDirtyUsers =
       }
 
       dispatch(setDirtyLoading(false))
+    }
+  }
+
+export const fetchUserMetrics =
+  (): AppThunk => async (dispatch, getState) => {
+    const { metrics } = selectUsers(getState())
+
+    if (!metrics) {
+      try {
+        const data = await getUserMetrics()
+
+        if (data) {
+          dispatch(setMetrics(data))
+        }
+      } catch (e) {
+        console.log(e)
+      }
     }
   }

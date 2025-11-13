@@ -26,6 +26,15 @@ else
   cd ..
 fi
 
+if [ -f "./output/metric_data.json" ]; then
+  echo "Found existing metric_data.json."
+else
+  echo "No metric data found. Generating now..."
+  cd scripts
+  npx ts-node generateMetrics.ts
+  cd ..
+fi
+
 # Start backend in background
 echo "Starting backend server..."
 npm run start &

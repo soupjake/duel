@@ -1,7 +1,7 @@
 import { promises as fs } from "fs"
 import path from "path"
-import { User } from "./types"
 import { parseRaw, saveToFile } from "./utils"
+import { User } from "../types/user"
 
 async function loadAndCleanData(dirPath: string) {
   const readFiles = await fs.readdir(dirPath)
@@ -43,6 +43,8 @@ async function loadAndCleanData(dirPath: string) {
 
 
 async function main() {
+  console.log("Starting processing data...")
+
   const dataDir = path.resolve("../../data/mixed")
   const cleanPath = path.resolve("../output/clean_data.json")
   const dirtyPath = path.resolve("../output/dirty_data.json")
@@ -52,7 +54,7 @@ async function main() {
   await saveToFile(cleanUsers, cleanPath)
   await saveToFile(dirtyUsers, dirtyPath)
 
-  console.log("Data processing complete!")
+  console.log("Processing data complete!")
 }
 
 main().catch(err => {

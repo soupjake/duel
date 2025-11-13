@@ -1,5 +1,6 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit"
 import type { User } from "../types/user"
+import type { Metrics } from "../types/metric"
 
 type UserState = {
   cleanUsers: User[]
@@ -9,6 +10,7 @@ type UserState = {
   dirtyLoading: boolean
   dirtyError: boolean
   selectedUser: User | undefined
+  metrics: Metrics | undefined
 }
 
 export const initialState: UserState = {
@@ -18,7 +20,8 @@ export const initialState: UserState = {
   dirtyUsers: [],
   dirtyLoading: false,
   dirtyError: false,
-  selectedUser: undefined
+  selectedUser: undefined,
+  metrics: undefined
 }
 
 export const userSlice = createSlice({
@@ -46,6 +49,9 @@ export const userSlice = createSlice({
     setSelectedUser: (state: UserState, action: PayloadAction<User | undefined>) => {
       state.selectedUser = action.payload
     },
+    setMetrics: (state: UserState, action: PayloadAction<Metrics | undefined>) => {
+      state.metrics = action.payload
+    },
   },
 })
 
@@ -56,7 +62,8 @@ export const {
   setDirtyUsers,
   setDirtyLoading,
   setDirtyError,
-  setSelectedUser
+  setSelectedUser,
+  setMetrics
 } = userSlice.actions
 
 export default userSlice.reducer

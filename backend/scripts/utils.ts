@@ -1,8 +1,10 @@
-import { promises as fs } from "fs"
+import { promises, existsSync, readFileSync } from "fs"
 import { v4 as uuid } from "uuid"
+import path from "path"
+import { Model } from "mongoose"
 
 export async function saveToFile(data: any, outPath: string) {
-  await fs.writeFile(outPath, JSON.stringify(data, null, 2), "utf8")
+  await promises.writeFile(outPath, JSON.stringify(data, null, 2), "utf8")
   console.log(`Saved records to ${outPath}`)
 }
 
@@ -59,4 +61,24 @@ export function parseRaw(raw: string) {
   }
 
   return parsed
+}
+
+export async function seedModel<T>(model: Model<T>, filename: string) {
+  const dataPath = path.resolve(process.cwd(), `output/${filename}`)
+
+  if (!existsSync(dataPath)) {
+    console.warn(`No seed file found`)
+    return
+  }
+
+  const raw = readFileSync(dataPath, "utf8")
+  const users = JSON.parse(raw)
+  const count = await model.countDocuments()
+
+  if (count === 0) {
+    await model.insertMany(users)
+    console.log(`Seeded ${users.length} items`)
+  } else {
+    console.log(`Collection already contains ${count} documents`)
+  }
 }

@@ -2,23 +2,21 @@
 import path from "path"
 import fs from "fs"
 import { saveToFile } from "./utils"
-import { User } from "./types"
-
 
 async function generateMetrics(dataPath: string) {
   const raw = fs.readFileSync(dataPath, "utf8")
   const users = JSON.parse(raw)
 
-  let mostLiked: User | null = null
-  let mostCommented: User | null = null
-  let mostShared: User | null = null
+  let mostLiked = ""
+  let mostCommented = ""
+  let mostShared = ""
 
   let maxLikes = 0
   let maxComments = 0
   let maxShares = 0
 
   for (const user of users) {
-    if (!user.advocacy_programs?.length) {
+    if (!user.user_id || !user.advocacy_programs?.length) {
       continue
     }
 
@@ -32,31 +30,44 @@ async function generateMetrics(dataPath: string) {
       }
 
       for (const task of program.tasks_completed) {
-        const likes = task?.likes ?? 0
-        const comments = task?.comments ?? 0
-        const shares = task?.shares ?? 0
-
-        totalLikes += likes || 0
-        totalComments += comments || 0
-        totalShares += shares || 0
+        if (task) {
+          totalLikes += task.likes ?? 0
+          totalComments += task.comments ?? 0
+          totalShares += task.shares ?? 0
+        }
       }
     }
 
     if (totalLikes > maxLikes) {
       maxLikes = totalLikes
-      mostLiked = user
+      mostLiked = user.user_id
     }
+
     if (totalComments > maxComments) {
       maxComments = totalComments
-      mostCommented = user
+      mostCommented = user.user_id
     }
+
     if (totalShares > maxShares) {
       maxShares = totalShares
-      mostShared = user
+      mostShared = user.user_id
     }
   }
 
-  return { mostLiked, mostCommented, mostShared }
+  return { 
+    mostLiked: {
+      user_id: mostLiked,
+      value: maxLikes
+    },
+    mostCommented: {
+      user_id: mostCommented,
+      value: maxComments
+    },
+    mostShared: {
+      user_id: mostShared,
+      value: maxShares
+    }
+  }
 }
 
 
@@ -64,14 +75,13 @@ async function main() {
   console.log("Starting generating metrics...")
 
   const cleanPath = path.resolve("../output/clean_data.json")
+  const metricsPath = path.resolve("../output/metric_data.json")
 
   const metrics = await generateMetrics(cleanPath)
 
-  const metricsPath = path.resolve("../output/metric_data.json")
-
   await saveToFile(metrics, metricsPath)
 
-  console.log("Generated metrics!")
+  console.log("Generating metrics complete!")
 }
 
 main().catch(err => {
