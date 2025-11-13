@@ -72,12 +72,12 @@ export async function seedModel<T>(model: Model<T>, filename: string) {
   }
 
   const raw = readFileSync(dataPath, "utf8")
-  const users = JSON.parse(raw)
+  const items = JSON.parse(raw)
   const count = await model.countDocuments()
 
   if (count === 0) {
-    await model.insertMany(users)
-    console.log(`Seeded ${users.length} items`)
+    await model.insertMany(items)
+    console.log(`Seeded items`)
   } else {
     console.log(`Collection already contains ${count} documents`)
   }
