@@ -61,7 +61,11 @@ export const UserTable = (props: Props) => {
 
     return (
         <Table
-            style={{ width: "100%"}}
+            style={{ 
+                width: "100%",
+                overflow: "scroll",
+                background: "white"
+            }}
             dataSource={data}
             columns={columns}
             loading={loading}

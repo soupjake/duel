@@ -14,6 +14,7 @@ import {
 export const fetchUsers = (): AppThunk => async (dispatch) => {
   await dispatch(fetchCleanUsers())
   dispatch(fetchDirtyUsers())
+  dispatch(fetchUserMetrics())
 }
 
 export const fetchCleanUsers =
@@ -26,7 +27,7 @@ export const fetchCleanUsers =
       try {
         const data = await getCleanUsers()
 
-        if (data) {
+        if (data?.length) {
           dispatch(setCleanUsers(data))
         }
       } catch (e) {
@@ -50,7 +51,7 @@ export const fetchDirtyUsers =
       try {
         const data = await getDirtyUsers()
 
-        if (data) {
+        if (data?.length) {
           dispatch(setDirtyUsers(data))
         }
       } catch (e) {
@@ -70,8 +71,8 @@ export const fetchUserMetrics =
       try {
         const data = await getUserMetrics()
 
-        if (data) {
-          dispatch(setMetrics(data))
+        if (data?.length) {
+          dispatch(setMetrics(data[0]))
         }
       } catch (e) {
         console.log(e)

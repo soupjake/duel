@@ -1,6 +1,7 @@
 import mongoose from "mongoose"
 import { MongoMemoryServer } from "mongodb-memory-server"
 import { seedCleanUsers, seedDirtyUsers } from "./schemas/user"
+import { seedUserMetrics } from "./schemas/metric"
 
 export async function connectDB() {
   const mongo = await MongoMemoryServer.create()
@@ -12,4 +13,5 @@ export async function connectDB() {
 
   await seedCleanUsers()
   await seedDirtyUsers()
+  await seedUserMetrics()
 }

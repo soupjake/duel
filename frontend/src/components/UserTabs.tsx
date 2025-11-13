@@ -2,6 +2,7 @@ import { useMemo } from "react"
 import { Tabs } from "antd"
 import { CleanUsers } from "./CleanUsers"
 import { DirtyUsers } from "./DirtyUsers"
+import { UserMetrics } from "./UserMetrics"
 
 export const UserTabs = () => {
     const items = useMemo(
@@ -15,6 +16,11 @@ export const UserTabs = () => {
                 key: "2",
                 label: "Dirty Users",
                 children: <DirtyUsers />,
+            },
+            {
+                key: "3",
+                label: "User Metrics",
+                children: <UserMetrics />,
             },
         ],
         []

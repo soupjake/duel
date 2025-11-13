@@ -1,3 +1,4 @@
+import Card from "antd/es/card/Card"
 import { useAppSelector } from "../hooks/storeHooks"
 import { selectUserMetrics } from "../store/userSelectors"
 import { UserMetric } from "./UserMetric"
@@ -10,7 +11,7 @@ export const UserMetrics = () => {
     }
 
     return (
-        <div>
+        <Card title="User Metrics">
             <UserMetric 
                 metric={userMetrics.mostLiked}
                 label="Most liked:"
@@ -23,6 +24,6 @@ export const UserMetrics = () => {
                 metric={userMetrics.mostShared}
                 label="Most shared:"
             />
-        </div>
+        </Card>
     )
 }
